@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do app</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <style>
+        body{
+            background-color: mediumslateblue;
+            height:1000px;
+        }
+        .box{
+            width:600px;
+            margin:0px auto;
+            border-radius:30px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <br>
+    <section>
+        <div class='box'>
+        <h1 class='text-center'>Cadastro de tarefas</h1>
+        <br>
+        <form action="{{url_for('add')}}" method="post">
+            <label class='label' for='title'>Informe a tarefa : </label>
+            <input type='text' class="input is-primary" name='title' placeholder="Entre com a tarefa...">
+            
+            <button class="button is-link is-outlined mt-5" type='submit'>Adicionar</button>
+        </form>
+        </div>
+    </section>
+    <br>
+    <br>
+    <div class='box'>
+        <h1 class='text-center'>Tarefas</h1>
+        {% for todo in todo_list %}
+
+            <h3>{{ todo.id }} ) {{ todo.title }} </h3>
+
+            {% if todo.complete == False %}
+                <span>Não concluído</span>
+            {% else %}
+                <span>Concluído</span>
+            {% endif%}
+            <a href="/update/{{todo.id}}" class="button is-primary">Atualizar</a>  <a href="/delete/{{todo.id}}" class="button is-danger">Deletar</a>
+        {% endfor %}
+
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+
+</body>
+</html>
